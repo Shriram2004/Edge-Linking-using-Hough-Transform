@@ -29,42 +29,45 @@ Developed By: Shriram R
 
 Register No: 212221240053
 
-### Read image and convert it to grayscale image
+### 
+
+### Read and display the input image
 ```Python
 import numpy as np
-import matplotlib.pyplot as plt
 import cv2
-image = cv2.imread("line.jfif",0)
+import matplotlib.pyplot as plt
+input_image = cv2.imread("mustang.jpg")
+input_image = cv2.cvtColor(input_image,cv2.COLOR_BGR2RGB)
+plt.axis('off')
+plt.imshow(input_image)
+plt.show()
+```
+
+### Convert it to Grayscale image
+```Python
+image = cv2.imread("mustang.jpg",0)
 img = cv2.GaussianBlur(image,(3,3),0)
 plt.axis('off')
 plt.imshow(img)
 plt.show()
 ```
-
 ### Find the edges in the image using canny detector and display
-```Python
-edge = cv2.Canny(img,100,200)
-plt.imshow(edge,cmap='gray')
-plt.title('Edge Image')
-plt.xticks([])
-plt.yticks([])
-plt.show()
-
-```
-### Detect points that form a line using HoughLines
 ```Python
 lines=cv2.HoughLinesP(edge,1,np.pi/180, threshold=80, minLineLength=50,maxLineGap=250)
 ```
 
 
-### Draw lines on the image
+### Detect points that form a line using HoughLinesP
 ```Python
 for line in lines:
     x1,y1,x2,y2 = line[0]
     cv2.line(edge,(x1,y1),(x2,y2),(255,0,0),3)
+plt.imshow(edge)
+plt.axis('off')
+plt.show()
 
 ```
-### Display the result
+### Draw lines on the image and display
 ```Python
 plt.imshow(edge)
 plt.axis('off')
@@ -75,17 +78,17 @@ plt.show()
 ```
 ## Output
 ### Input image
-![](o4.png)
+![](i1.png)
 ### Grayscale image
-![](o1.png)
+![](i2.png)
 
 ### Canny Edge detector output
 
-![](o2.png)
+![](i3.png)
 
 
 ### Display the result of Hough transform
-![](o3.png)
+![](i4.png)
 
 
 
